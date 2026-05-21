@@ -2,30 +2,69 @@
 
 {% block content %}
 
-    <div class="container py-5">
-        <h1 class="fw-bold">Contacto</h1>
-        <p class="lead">Esta es la página de contacto.</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg overflow-hidden" style="border-radius: 20px;">
+                <div class="row g-0">
+                    <!-- Información de contacto lateral -->
+                    <div class="col-md-4 bg-primary text-white p-5 d-flex flex-column justify-content-center">
+                        <h2 class="fw-bold mb-4">¡Hablemos!</h2>
+                        <p class="mb-5">¿Tienes alguna duda sobre nuestros ecosistemas o necesitas soporte técnico? Estamos aquí para ayudarte.</p>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="me-3"><i class="bi bi-geo-alt-fill"></i></div>
+                            <p class="mb-0">Santiago, Chile</p>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="me-3"><i class="bi bi-envelope-fill"></i></div>
+                            <p class="mb-0">soporte@goldoren.com</p>
+                        </div>
+                        <div class="d-flex">
+                            <div class="me-3"><i class="bi bi-clock-fill"></i></div>
+                            <p class="mb-0">Lun - Vie: 9:00 - 18:00</p>
+                        </div>
+                    </div>
 
-        <!-- Formulario visual de contacto.
-             Por ahora no envía datos, solo muestra los campos en pantalla. -->
-        <form>
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-control">
+                    <!-- Formulario -->
+                    <div class="col-md-8 p-5 bg-white">
+                        <h3 class="fw-bold text-dark mb-4">Envíanos un mensaje</h3>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Nombre</label>
+                                    <input type="text" class="form-control form-control-lg bg-light border-0" placeholder="Tu nombre">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Correo</label>
+                                    <input type="email" class="form-control form-control-lg bg-light border-0" placeholder="ejemplo@correo.com">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Asunto</label>
+                                <select class="form-select form-select-lg bg-light border-0">
+                                    <option selected disabled>Selecciona una opción</option>
+                                    <option>Soporte Técnico</option>
+                                    <option>Ventas / Cotización</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Mensaje</label>
+                                <textarea class="form-control bg-light border-0" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm w-100 w-md-auto">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Correo</label>
-                <input type="email" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Mensaje</label>
-                <textarea class="form-control" rows="4"></textarea>
-            </div>
-
-            <button class="btn btn-primary">Enviar</button>
-        </form>
+        </div>
     </div>
+</div>
 
 {% endblock %}

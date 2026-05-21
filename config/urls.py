@@ -27,7 +27,8 @@ urlpatterns = [
     path('tareas/', views.tareas, name='tareas'),
     path('productos1/', views.productos1, name='productos1'),
     path('productos2/', views.productos2, name='productos2'),
-    path('productos3/', views.productos3, name='productos3')
+    path('productos3/', views.productos3, name='productos3'),
+    path('presentacion/', views.presentacion, name='presentacion')
 
 
 ]

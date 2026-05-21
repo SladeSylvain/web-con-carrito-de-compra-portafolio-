@@ -36,3 +36,6 @@ def productos2(request):
 
 def productos3(request):
     return render(request, 'myfirstapp/productos3.html')
+
+def presentacion(request):
+    return render(request, 'myfirstapp/presentacion.html')
