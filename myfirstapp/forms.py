@@ -1,13 +1,23 @@
 from django import forms
+from .models import Usuario, Contacto
 
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contacto
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tu nombre'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'tu@email.com'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Escribe tu mensaje...'}),
+        }
 
-class ContactForm(forms.Form):
-    nombre = forms.CharField(label='Nombre', max_length=100)
-    correo = forms.EmailField(label='Correo electrónico')
-    mensaje = forms.CharField(label='Mensaje', widget=forms.Textarea)
-
-class RegistroForm(forms.Form):
-    username = forms.CharField(max_length=50, label="Nombre de usuario")
-    email = forms.EmailField(label="Correo electrónico")
-    edad = forms.IntegerField(label="Edad")
-    ciudad = forms.CharField(max_length=100, label="Ciudad")
+class RegistroForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'edad', 'ciudad']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tu nombre de usuario'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'tu@email.com'}),
+            'edad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Tu edad'}),
+            'ciudad': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Santiago, Valparaíso...'}),
+        }

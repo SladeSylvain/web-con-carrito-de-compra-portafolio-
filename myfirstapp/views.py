@@ -1,23 +1,46 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm, RegistroForm
-from .models import Contacto, Usuario
+from .models import Contacto, Usuario, Tarea
 
 # Create your views here.
+
+def home(request):
+    return render(request, 'myfirstapp/home.html')
+
+def nosotros(request):
+    return render(request, 'myfirstapp/nosotros.html')
+
+def presentacion(request):
+    return render(request, 'myfirstapp/presentacion.html')
+
+def perfil(request):
+    return render(request, 'myfirstapp/perfil.html')
+
+
+# --- SECCIÓN PRODUCTOS ---
+
+def productos1(request):
+    return render(request, 'myfirstapp/productos1.html')
+
+def productos2(request):
+    return render(request, 'myfirstapp/productos2.html')
+
+def productos3(request):
+    return render(request, 'myfirstapp/productos3.html')
+
+
+# --- VISTAS CON FORMULARIOS Y PROCESAMIENTO ---
 
 def contacto(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            correo = form.cleaned_data['correo']
-            mensaje = form.cleaned_data['mensaje']
-            
-            Contacto.objects.create(
-                name=nombre,
-                email=correo,
-                message=mensaje
-            )
-            return render(request, 'myfirstapp/contacto.html', {'form': form, 'mensaje': '¡Gracias por contactarnos!'})
+            form.save()  # Guarda los datos directamente en la BD
+            # Retornamos el template con un formulario limpio y el mensaje de éxito
+            return render(request, 'myfirstapp/contacto.html', {
+                'form': ContactForm(), 
+                'mensaje': '¡Gracias por contactarnos!'
+            })
     else:
         form = ContactForm()
     
@@ -26,64 +49,46 @@ def contacto(request):
 
 def registro(request):
     if request.method == 'POST':
-        # Pasamos los datos del POST al formulario para validarlos
         form = RegistroForm(request.POST)
-        
         if form.is_valid():
-            # Si el formulario es válido, limpiamos los datos
-            data = form.cleaned_data
-            
-            # Paso 5 de la imagen: Guardar en la BD
-            Usuario.objects.create(
-                username=data['username'],
-                email=data['email'],
-                edad=data['edad'],
-                ciudad=data['ciudad']
-            )
-            
-            # Redirigir a una página de éxito o a donde prefieras para evitar reenvíos
-
+            form.save()  # Guarda el nuevo usuario en la BD de forma limpia
+            # Retornamos el template con el formulario vacío y el mensaje de éxito
+            return render(request, 'myfirstapp/registro.html', {
+                'form': RegistroForm(),  
+                'mensaje': '¡Usuario registrado correctamente!'
+            })
     else:
-        # Si es GET, creamos el formulario vacío
         form = RegistroForm()
         
     return render(request, 'myfirstapp/registro.html', {'form': form})
 
 
-def home(request):
-    return render(request, 'myfirstapp/home.html')
-
-def nosotros(request):
-    return render(request, 'myfirstapp/nosotros.html')
-
-def productos1(request):
-    return render(request, 'myfirstapp/productos1.html')
-
-def perfil(request):
-    return render(request, 'myfirstapp/perfil.html')
-
 def tareas(request):
-    lista_tareas = [
-        {'titulo': 'Estudiar Django', 'completada': True},
-        {'titulo': 'Hacer ejercicio', 'completada': False},
-        {'titulo': 'Leer documentación', 'completada': False},
-        {'titulo': 'Practicar templates', 'completada': True},
-    ]
-    context = {
-        'tareas': lista_tareas
-    }
+    if request.method == 'POST':
+        # 1. ACCIÓN: AGREGAR TAREA
+        if 'agregar' in request.POST:
+            titulo = request.POST.get('titulo', '').strip()
+            if titulo:
+                Tarea.objects.create(titulo=titulo)
+        
+        # 2. ACCIÓN: ELIMINAR TAREA
+        elif 'eliminar' in request.POST:
+            tarea_id = request.POST.get('tarea_id')
+            Tarea.objects.filter(id=tarea_id).delete()
+
+        # 3. ACCIÓN: MARCAR COMO COMPLETADA / PENDIENTE (TOGGLE)
+        elif 'toggle' in request.POST:
+            tarea_id = request.POST.get('tarea_id')
+            try:
+                tarea = Tarea.objects.get(id=tarea_id)
+                tarea.completada = not tarea.completada
+                tarea.save()
+            except Tarea.DoesNotExist:
+                pass  # Evita que la app se caiga si la tarea ya no existe
+
+        # Redirecciona a la misma página para limpiar el envío del formulario
+        return redirect('tareas')
+
+    # Si es una petición GET (cargar la página por primera vez)
+    context = {'tareas': Tarea.objects.all().order_by('-creada')}
     return render(request, 'myfirstapp/tareas.html', context)
-
-def productos2(request):
-    return render(request, 'myfirstapp/productos2.html')
-
-def productos3(request):
-    return render(request, 'myfirstapp/productos3.html')
-
-def presentacion(request):
-    return render(request, 'myfirstapp/presentacion.html')
-
-
-def contacto(request):
-    return render(request, 'myfirstapp/contacto.html')
-

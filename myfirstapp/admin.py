@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contacto, Usuario
+from .models import Contacto, Usuario, Tarea
 
 
 # Registramos el modelo Contacto en el panel de administración.
@@ -14,7 +14,11 @@ class ContactoAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
 
 @admin.register(Usuario)
-
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'email', 'edad', 'ciudad')
     search_fields = ('username', 'email')
+
+@admin.register(Tarea)
+class TareaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'titulo', 'completada', 'creada')
+    list_editable = ('completada',)
