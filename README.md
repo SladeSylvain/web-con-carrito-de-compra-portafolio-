@@ -143,14 +143,15 @@ Bootstrap 5                 ✅  Cards, Carousels, Badges, Alerts, Responsive Gr
 ---
 
 ## 🔜 Próximos Pasos
+```bash
+Implementar módulo de administración de usuarios y permisos utilizando el módulo preconstruido de Django.:
 
-- [ ] Migrar el modelo `Usuario` al sistema `AbstractUser` de Django para integrar autenticación nativa completa
-- [ ] Implementar CRUD completo para tareas (crear, editar, eliminar desde el frontend)
-- [ ] Añadir paginación a las listas de contactos y tareas
-- [ ] Configurar variables de entorno con `python-decouple` (sacar `SECRET_KEY` del código)
-- [ ] Deploy en Railway o Render
+Configurar django.contrib.admin 
+Registrar tus modelos en admin.py
+Migrar Usuario a AbstractUser para integrarlo con el sistema de autenticación nativo
+Gestionar usuarios y permisos desde el panel admin
 
----
+```
 
 ## ▶️ Correr el Proyecto Localmente
 
