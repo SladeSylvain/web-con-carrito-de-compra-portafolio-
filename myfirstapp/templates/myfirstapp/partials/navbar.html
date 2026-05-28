@@ -11,6 +11,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+
         <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
@@ -25,6 +26,23 @@
                 </li>
                 <li class="nav-item ms-lg-3">
                     <a class="btn btn-outline-light btn-sm px-4 rounded-pill" href="/tareas/">Tareas</a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-sm px-4 rounded-pill">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm px-4 rounded-pill">
+                        Iniciar sesión
+                    </a>
+                    {% endif %}
+                </li>
+
                 </li>
             </ul>
         </div>

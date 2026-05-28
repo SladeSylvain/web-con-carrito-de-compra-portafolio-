@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from myfirstapp import views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,8 +17,8 @@ urlpatterns = [
     path('productos3/', views.productos3, name='productos3'),
     path('presentacion/', views.presentacion, name='presentacion'),
     path('registro/', views.registro, name='registro'),
-    path('admin', admin.site.urls)
-
-
-
+    path('admin', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(), name='login'),    
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('contacto/borrar/<int:pk>/', views.borrar_contacto, name='borrar_contacto')
 ]
