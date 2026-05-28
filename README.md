@@ -1,53 +1,166 @@
-# 🚀 Mi Viaje de Aprendizaje con Django y Git: Hacia mi Portafolio Profesional
+# 🚀 Portafolio Web con Django — Diario de Aprendizaje
 
-¡Bienvenido/a a este repositorio! Este proyecto no es una página web estática ni un ejercicio terminado; **es un espacio en constante evolución**. Mi objetivo es transformar este código inicial, paso a paso, en mi **portafolio profesional definitivo**. 
-
-La idea central de este repositorio es la **transparencia y la mejora continua**: quiero que cualquier persona que entre aquí pueda ver el historial de cambios, notar en qué me equivoqué, cómo enfrenté los desafíos técnicos y de qué manera fui refinando el código hasta construir una aplicación robusta, moderna y eficiente. ¡El camino del aprendizaje es lo que realmente da valor al resultado final!
+Bienvenido/a a este repositorio. No es un proyecto terminado: **es un portafolio en construcción constante**. Cada commit representa un día real de estudio, errores, soluciones y conceptos nuevos dominados. Si entras aquí, verás exactamente cómo pasé de una página HTML estática a una aplicación Django con autenticación, permisos y base de datos.
 
 ---
 
-## 🛠️ Tecnologías y Conceptos Practicados
-* **Backend:** Python 3, Django (MVT, URLconf, Views, Context Data).
-* **Frontend:** HTML5, CSS3, Bootstrap 5 (Cards, Carousels, Badges, Responsive Design).
-* **Control de Versiones:** Git & GitHub.
+## 🛠️ Stack Tecnológico
+
+| Capa | Tecnologías |
+|---|---|
+| **Backend** | Python 3, Django (MVT, ORM, Forms, Auth) |
+| **Frontend** | HTML5, CSS3, Bootstrap 5 |
+| **Base de Datos** | SQLite (desarrollo) |
+| **Control de Versiones** | Git & GitHub |
 
 ---
 
-## 🧠 Lo Que Aprendí Hoy (Conceptos Dominados)
-Hoy dominé las cuatro herramientas esenciales del sistema de plantillas de Django (**DTL**):
-1. **`{% include %}`:** A modularizar código para reutilizar componentes como barras de navegación (`navbar.html`) y pies de página (`footer.html`), manteniendo un proyecto limpio (**DRY** - *Don't Repeat Yourself*).
-2. **`{{ variables }}`:** A pasar datos dinámicos estructurados en diccionarios de Python desde la vista (`views.py`) y renderizarlos limpiamente en el HTML.
-3. **`{% for %}`:** A iterar listas de datos (como tareas y artículos de blog) y generar estructuras visuales repetitivas automáticamente usando `{{ forloop.counter }}` para enumerar elementos.
-4. **`{% if %}`:** A implementar lógica condicional en el frontend para cambiar dinámicamente clases de Bootstrap (como insignias de estados `bg-success` y `bg-warning`).
+## 📁 Estructura del Proyecto
+
+```
+config/           → Configuración global (settings.py, urls.py)
+myfirstapp/
+  ├── models.py   → Modelos: Tarea, Contacto, Usuario
+  ├── views.py    → Vistas con lógica y permisos
+  ├── forms.py    → Formularios con validación
+  ├── admin.py    → Panel de administración
+  ├── templates/  → HTML con Django Template Language
+  └── static/     → Imágenes y recursos estáticos
+```
 
 ---
 
-## 📈 Lo Que Mejoré
-* **Comprensión de la Arquitectura Web:** Entendí el flujo de una petición en Django (Petición ➡️ URLconf ➡️ Vista ➡️ Template) y por qué es una mala práctica saturar las vistas con lógica pesada (*"Modelos gordos, Vistas flacas"*).
-* **Diseño UI Responsivo:** Mejoré la presentación visual de la información utilizando componentes avanzados de Bootstrap, como carruseles de imágenes de hardware/tecnología y tarjetas con sombras estilizadas.
-* **Manejo de la Terminal y Git:** Gané soltura administrando repositorios locales y configurando conexiones con repositorios remotos.
+## 📅 Historial de Aprendizaje (Día a Día)
+
+### Día 1 — 19 May · *Página web base*
+`f529a96`
+
+El punto de partida. Proyecto Django creado desde cero: configuración inicial, primera app (`myfirstapp`) y servidor corriendo localmente.
+
+**Conceptos activados:** `django-admin startproject`, `startapp`, `runserver`, estructura de carpetas de Django.
 
 ---
 
-## ⚠️ Lo Que Me Equivoqué (Y Cómo lo Solucioné)
-El error es parte fundamental del crecimiento técnico. Estos fueron mis principales tropezones de hoy:
+### Día 2 — 20 May · *Portafolio con carrito de compra + README + Mejora de perfil*
+`3b0ec7a` · `7159418` · `22a0443`
 
-1. **El Clásico Error 404 (URL Inexistente):**
-   * *Qué pasó:* Intenté acceder a `productos1/` en el navegador y Django arrojó un error detallado de rutas.
-   * *Qué aprendí:* Comprendí la rigurosidad del archivo `urls.py`. Aprendí a leer el mapa de rutas que Django genera con `DEBUG = True` para identificar errores de tipeo o rutas no registradas rápidamente.
-2. **Sintaxis Incorrecta en Git Remote:**
-   * *Qué pasó:* Al intentar desvincular un repositorio remoto, ejecuté `git remote remove` sin especificar el alias.
-   * *Qué aprendí:* Revisé la documentación de comandos de Git. Aprendí a usar `git remote -v` para listar y verificar el nombre exacto del enlace remoto (que comúnmente es `origin`) antes de intentar eliminarlo.
-3. **Paso Directo de Contexto en Render:**
-   * *Qué pasó:* Inicialmente pasé un diccionario de datos plano directamente en el argumento de contexto de la función `render()`.
-   * *Qué aprendí:* Comprendí que la mejor práctica es envolver los datos dentro de un diccionario de contexto estructurado (ej. `context = {'usuario': datos_usuario}`) para mantener el código escalable y ordenado al renderizar en el template.
+El salto grande inicial. Se construyeron las primeras páginas reales del portafolio usando el sistema de plantillas de Django (DTL) y componentes de Bootstrap 5.
+
+**Lo que se construyó:**
+- Páginas: `home`, `perfil`, `presentacion`, `contacto`, `productos` (3 variantes)
+- Componentes reutilizables: `navbar.html` y `footer.html` con `{% include %}`
+- Datos dinámicos pasados desde `views.py` al template con `{{ variables }}`
+- Iteración de listas con `{% for %}` y `{{ forloop.counter }}`
+- Lógica condicional con `{% if %}` para cambiar clases de Bootstrap (badges `bg-success` / `bg-warning`)
+- Banner de imagen estática registrado en `settings.py`
+
+**Errores que enfrenté:**
+- **Error 404:** Intenté acceder a `productos1/` sin registrar la ruta. Aprendí a leer el mapa de URLs que Django genera con `DEBUG = True`.
+- **Contexto mal estructurado:** Pasé datos planos directo al `render()` en vez de envolverlos en un diccionario. Solución: `context = {'clave': valor}`.
+
+**Conceptos dominados:** `{% include %}`, `{{ variables }}`, `{% for %}`, `{% if %}`, flujo Petición → URLconf → Vista → Template, principio DRY.
 
 ---
 
-## 🚀 Próximos Pasos (Hacia la Mejora Continua)
-* [ ] Conectar la aplicación a una Base de Datos real mediante los **Modelos de Django (`models.py`)**.
-* [ ] Crear formularios dinámicos para que el usuario pueda agregar nuevas tareas o artículos desde la interfaz web.
-* [ ] Implementar el sistema de autenticación de usuarios propio de Django.
+### Día 3 — 23 May · *Admin, Formulario de Registro + Ramas Git*
+`6370d60` · `e870779` · `fbd1c8c` · `ef64aa2` · `ede071b`
+
+Día intenso: dos temas al mismo tiempo. Por un lado, conectar Django con el panel de administración y crear el primer formulario real. Por otro, aprender a trabajar con ramas en Git.
+
+**Lo que se construyó:**
+- `admin.py` configurado para gestionar modelos desde el panel `/admin`
+- Modelo `Usuario` con campos: `username`, `email`, `edad`, `ciudad`, `password`
+- Formulario de registro (`RegistroForm`) con `ModelForm`
+- Primera migración `0001_initial.py` y base de datos SQLite activa
+- Página `registro.html` conectada a la vista con lógica POST/GET
+
+**Git — lo que practiqué:**
+- Crear y cambiar ramas: `git branch pruebas1`, `git switch`
+- Combinar cambios: `git merge`
+- Resolver un merge con repositorio remoto: `git pull` + resolución de conflicto
+
+**Errores que enfrenté:**
+- **`git remote remove` sin alias:** Ejecuté el comando incompleto. Solución: usar `git remote -v` primero para ver el nombre exacto (`origin`).
+- Conflicto de merge entre rama local y remota: aprendí a leer el diff y aceptar los cambios correctos.
+
+**Conceptos dominados:** `ModelForm`, `migrations`, panel `admin`, `git branch`, `git merge`, resolución de conflictos.
 
 ---
-*«El código limpio no es el que se escribe perfecto a la primera, sino el que se refina constantemente a través del aprendizaje diario.»*
+
+### Día 4 — 25 May · *Modelo Tarea + Posts en Admin*
+`b172088`
+
+Se añadió el modelo `Tarea` y se registró en el panel de administración. También se conectó el formulario de contacto al ORM para persistir mensajes en la base de datos.
+
+**Lo que se construyó:**
+- Modelo `Tarea`: campos `titulo` (CharField), `completada` (BooleanField), `creada` (DateTimeField auto)
+- Modelo `Contacto`: campos `name`, `email`, `message`
+- `admin.py` actualizado con ambos modelos visibles en `/admin`
+- Migración `0002_tarea.py`
+- Vista `contacto` actualizada para leer y mostrar los contactos guardados con `Contacto.objects.all()`
+
+**Conceptos dominados:** `BooleanField`, `DateTimeField(auto_now_add=True)`, `objects.all()`, registro de múltiples modelos en `admin.py`.
+
+---
+
+### Día 5 — 27 May · *Sistema de Permisos y Seguridad*
+`fa27a10`
+
+El salto cualitativo más grande hasta ahora. Se implementó un sistema real de control de acceso usando el módulo de autenticación nativo de Django.
+
+**Lo que se construyó:**
+- `@login_required` en vistas protegidas (redirige a login si no hay sesión activa)
+- `request.user.has_perm('myfirstapp.add_contacto')` para controlar quién puede enviar mensajes
+- `PermissionDenied` como excepción HTTP cuando un usuario intenta una acción no autorizada
+- Vista `borrar_contacto` con verificación doble de permisos (`delete_contacto` o `add_contacto`)
+- Sistema de mensajes (`messages.warning`) combinado con alertas Bootstrap
+- Confirmación JS con `onclick="return confirm(...)"` para evitar borrados accidentales
+- Contraseña encriptada con `make_password()` al registrar usuarios
+- Validación personalizada `clean_password()` en el formulario (mínimo 6 caracteres)
+- Migración `0003_usuario_password.py`
+- Renderizado condicional en templates con `{% if perms %}` para ocultar elementos según el rol
+
+**Errores que enfrenté:**
+- Entender la diferencia entre ocultar un botón en el template (UX) y bloquear la ruta en el servidor (seguridad real). Ambos son necesarios.
+
+**Conceptos dominados:** `@login_required`, `@permission_required`, `has_perm()`, `PermissionDenied`, `messages`, `make_password()`, validaciones `clean_<field>()`, seguridad en frontend Y backend.
+
+---
+
+## 🧠 Resumen de Conceptos Acumulados
+
+```
+Django Template Language    ✅  {% include %}, {{ var }}, {% for %}, {% if %}, {% if perms %}
+ORM & Modelos               ✅  CharField, EmailField, BooleanField, DateTimeField, ForeignKey (próximo)
+Formularios                 ✅  ModelForm, widgets, clean_field(), validaciones personalizadas
+Autenticación               ✅  login_required, has_perm(), PermissionDenied, make_password()
+Panel Admin                 ✅  Registro de modelos, gestión visual desde /admin
+Migraciones                 ✅  makemigrations, migrate, historial de esquema
+Git                         ✅  commit, push, pull, branch, switch, merge, resolución de conflictos
+Bootstrap 5                 ✅  Cards, Carousels, Badges, Alerts, Responsive Grid
+```
+
+---
+
+## 🔜 Próximos Pasos
+
+- [ ] Migrar el modelo `Usuario` al sistema `AbstractUser` de Django para integrar autenticación nativa completa
+- [ ] Implementar CRUD completo para tareas (crear, editar, eliminar desde el frontend)
+- [ ] Añadir paginación a las listas de contactos y tareas
+- [ ] Configurar variables de entorno con `python-decouple` (sacar `SECRET_KEY` del código)
+- [ ] Deploy en Railway o Render
+
+---
+
+## ▶️ Correr el Proyecto Localmente
+
+```bash
+git clone https://github.com/SladeSylvain/web-con-carrito-de-compra-portafolio-
+cd "django 1.5"
+pip install django
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Luego entra a `http://127.0.0.1:8000/` y al panel de admin en `http://127.0.0.1:8000/admin/`.
