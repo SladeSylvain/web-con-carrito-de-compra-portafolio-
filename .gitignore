@@ -1,0 +1,10 @@
+# Django ignore
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+venv/
+.agents/
+.idea/
+.vscode/
+*.log

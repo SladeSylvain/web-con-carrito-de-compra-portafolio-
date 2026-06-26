@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold fs-4" href="{% url 'home' %}">
+            <span class="text-primary">Gol'D</span>oren
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <!-- Dropdown de Productos -->
+                <li class="nav-item dropdown ms-lg-3">
+                    <a class="nav-link dropdown-toggle text-light fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-grid-fill me-1 text-primary"></i> Productos
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark border-secondary shadow" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item py-2" href="{% url 'productos1' %}"><i class="bi bi-terminal me-2"></i>Linux & Open Source</a></li>
+                        <li><a class="dropdown-item py-2" href="{% url 'productos2' %}"><i class="bi bi-microsoft me-2 text-info"></i>Microsoft & Windows</a></li>
+                        <li><a class="dropdown-item py-2" href="{% url 'productos3' %}"><i class="bi bi-apple me-2 text-white"></i>Mac & Apple Silicon</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link text-light fw-semibold" href="{% url 'nosotros' %}">Nosotros</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link text-light fw-semibold" href="{% url 'contacto' %}">Contacto</a>
+                </li>
+                
+                {% if user.is_authenticated %}
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link text-light fw-semibold" href="{% url 'perfil' %}">Mi Perfil</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link text-light fw-semibold" href="{% url 'tareas' %}">Tareas</a>
+                </li>
+                {% endif %}
+
+                <!-- Carrito de Compras Badge -->
+                <li class="nav-item ms-lg-3 me-lg-2">
+                    <a class="nav-link text-light fw-semibold position-relative px-2" href="{% url 'cart_detail' %}">
+                        <i class="bi bi-cart3 fs-5"></i>
+                        {% if user.is_authenticated and user.cart.total_items > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light" style="font-size: 0.7rem; padding: 0.25em 0.5em;">
+                                {{ user.cart.total_items }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <!-- Autenticación -->
+                <li class="nav-item ms-lg-3">
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-sm px-4 rounded-pill fw-semibold">
+                            Salir
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm px-4 rounded-pill fw-semibold">
+                        Entrar
+                    </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

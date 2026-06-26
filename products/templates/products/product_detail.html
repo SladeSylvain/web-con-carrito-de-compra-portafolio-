@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="row g-0">
+                    <!-- Imagen del Producto -->
+                    <div class="col-md-6 bg-light d-flex align-items-center justify-content-center">
+                        <img src="{{ product.image_url }}" class="img-fluid w-100" alt="{{ product.name }}" style="max-height: 500px; object-fit: cover;">
+                    </div>
+                    
+                    <!-- Información del Producto -->
+                    <div class="col-md-6 d-flex flex-column justify-content-between p-5">
+                        <div>
+                            <!-- Categoría -->
+                            <span class="badge bg-primary px-3 py-2 rounded-pill fw-semibold mb-3">{{ product.category.name }}</span>
+                            
+                            <!-- Nombre -->
+                            <h2 class="fw-bold mb-3 display-6">{{ product.name }}</h2>
+                            
+                            <!-- Precio -->
+                            <h3 class="text-primary fw-bold mb-4">${{ product.price|intcomma }}</h3>
+                            
+                            <!-- Descripción -->
+                            <h5 class="fw-semibold text-secondary small text-uppercase mb-2">Descripción</h5>
+                            <p class="text-muted lead fs-6 mb-4">{{ product.description }}</p>
+                            
+                            <!-- Stock -->
+                            <div class="d-flex align-items-center gap-2 mb-4">
+                                <span class="fw-semibold text-secondary small text-uppercase">Disponibilidad:</span>
+                                {% if product.stock > 0 %}
+                                    <span class="badge bg-success px-2.5 py-1 rounded">En Stock ({{ product.stock }} unidades)</span>
+                                {% else %}
+                                    <span class="badge bg-danger px-2.5 py-1 rounded">Agotado</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div>
+                            {% if product.stock > 0 %}
+                                <form action="{% url 'add_to_cart' product.pk %}" method="post" class="d-flex gap-3 align-items-center">
+                                    {% csrf_token %}
+                                    <div class="w-25">
+                                        <label for="quantity" class="visually-hidden">Cantidad</label>
+                                        <input type="number" name="quantity" id="quantity" class="form-control text-center rounded-3" value="1" min="1" max="{{ product.stock }}">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg flex-grow-1 rounded-pill fw-bold shadow">
+                                        <i class="bi bi-cart-plus me-2"></i> Añadir al Carrito
+                                    </button>
+                                </form>
+                            {% else %}
+                                <button class="btn btn-secondary btn-lg w-100 rounded-pill fw-bold" disabled>Producto Agotado</button>
+                            {% endif %}
+                            
+                            <div class="mt-4 border-top pt-3 d-flex justify-content-between">
+                                <a href="javascript:history.back()" class="text-decoration-none text-secondary fw-semibold small">
+                                    <i class="bi bi-arrow-left me-1"></i> Volver atrás
+                                </a>
+                                <a href="{% url 'home' %}" class="text-decoration-none text-primary fw-semibold small">
+                                    Ir a la Tienda <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

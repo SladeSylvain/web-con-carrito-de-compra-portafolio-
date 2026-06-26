@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <!-- Configuración de caracteres para soportar tildes, ñ y símbolos -->
+        <meta charset="UTF-8">
+
+        <!-- Permite que la página se adapte correctamente a celulares, tablets y computadores -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Se importa Bootstrap desde CDN.
+             Bootstrap nos permite usar clases ya preparadas para diseño,
+             como navbar, botones, formularios, colores, espacios, etc. -->
+        <link 
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+            rel="stylesheet"
+        >
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+        <title>Gol'Doren</title>
+    </head>
+
+    <!-- 
+        d-flex: convierte el body en un contenedor flexible.
+        flex-column: ordena los elementos de arriba hacia abajo.
+        min-vh-100: hace que el body tenga como mínimo el alto completo de la pantalla.
+
+        Esto se usa para poder dejar el footer pegado abajo,
+        incluso cuando el contenido de la página sea pequeño.
+    -->
+    <body class="d-flex flex-column min-vh-100">
+
+        <!-- Navbar principal del sitio.
+             Se deja dentro del layout para que aparezca igual en todas las páginas. -->
+        {% include 'partials/navbar.html' %}
+
+        <!-- 
+            main representa el contenido principal de la página.
+            flex-grow-1 hace que este bloque ocupe todo el espacio disponible.
+            Esto empuja el footer hacia abajo cuando hay poco contenido.
+        -->
+        <main class="flex-grow-1">
+            {% block content %}
+            <!-- Aquí se inserta el contenido específico de cada página -->
+            {% endblock %}
+        </main>
+
+        {% include 'partials/footer.html' %}
+
+        
+
+        <!-- 
+            Script de Bootstrap.
+            Es necesario para que funcionen elementos interactivos,
+            como el botón hamburguesa del navbar.
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        {% block scripts %}
+        {% endblock %}
+
+    </body>
+    </html>

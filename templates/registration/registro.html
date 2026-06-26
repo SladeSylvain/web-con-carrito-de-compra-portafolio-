@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold mb-4 text-center text-primary">Crear una Cuenta</h2>
+                    <p class="text-muted text-center mb-4">Únete a Gol'Doren para acceder a nuestro catálogo exclusivo y gestionar tus compras.</p>
+                    
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger rounded-3">
+                            {% for error in form.non_field_errors %}
+                                <div class="small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold small text-secondary">{{ field.label }}</label>
+                            
+                            {% if field.name == 'password' or field.name == 'password1' or field.name == 'password2' %}
+                            <div class="position-relative">
+                                <input type="password" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control rounded-3 pe-5 {% if field.errors %}is-invalid{% endif %}" required placeholder="******">
+                                <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor: pointer;" onclick="togglePass(this)"></i>
+                            </div>
+                            {% else %}
+                                <input type="{{ field.field.widget.input_type|default:'text' }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control rounded-3 {% if field.errors %}is-invalid{% endif %}" value="{{ field.value|default:'' }}" required placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}">
+                            {% endif %}
+
+                            {% if field.help_text %}
+                            <div class="form-text small text-muted" style="font-size: 0.8rem;">{{ field.help_text|safe }}</div>
+                            {% endif %}
+                            
+                            {% for error in field.errors %}
+                            <div class="invalid-feedback d-block small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm">Registrarse</button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <span class="text-muted small">¿Ya tienes cuenta? </span>
+                        <a href="{% url 'login' %}" class="small text-primary fw-bold text-decoration-none">Inicia Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function togglePass(icono) {
+    const input = icono.previousElementSibling;
+    input.type = input.type === 'password' ? 'text' : 'password';
+    icono.classList.toggle('bi-eye');
+    icono.classList.toggle('bi-eye-slash');
+}
+</script>
+{% endblock %}
