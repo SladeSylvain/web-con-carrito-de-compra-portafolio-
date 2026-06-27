@@ -31,7 +31,8 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.elasticbeanstalk.com',  # El punto al inicio permite cualquier subdominio de AWS Beanstalk
+    '.elasticbeanstalk.com', 
+     'goldoren-portafolio.onrender.com', # El punto al inicio permite cualquier subdominio de AWS Beanstalk
 ]
 
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- AGREGA ESTA LÍNEA AQUÍ
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
